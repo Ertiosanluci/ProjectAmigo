@@ -56,7 +56,11 @@ public class Engine {
                     verAmigos(misamigos);
                     break;
                 case 3:
-                    borrarAmigos(misamigos);
+                   if(borrarAmigos(misamigos)){
+                       System.out.println("Amigo Borrado Exitosamente");
+                   }else{
+                       System.out.println("No se ha borrado el amigo");
+                   }
                     break;
                 case 4:
                     continuar= salir(misamigos, fichero);
@@ -97,6 +101,7 @@ public String filtro(){
                    oos.writeObject(i);
                 }
             }
+            System.out.println("Guardando archivo");
         }catch (IOException e){
             e.printStackTrace();
         }catch (Exception e){
@@ -107,7 +112,7 @@ public String filtro(){
     public void verAmigos(TreeSet<Amigo> a){
         System.out.println(a.toString());
     }
-    public void borrarAmigos(TreeSet<Amigo> a){
+    public boolean borrarAmigos(TreeSet<Amigo> a){
         // no vas a tener dos amigos que se llamen igual y encima que hayan nacido el mismo día, tu tah loco.
         String nombre, apellido;
         System.out.println("Qué amigos quieres borrar");
@@ -116,6 +121,6 @@ public String filtro(){
         System.out.println("Ahora dime su apellido");
         apellido = filtro();
         Amigo amego = new Amigo(nombre, apellido, "");
-        a.remove(amego);
+        return a.remove(amego);
     }
 }
